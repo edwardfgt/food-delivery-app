@@ -21,8 +21,4 @@ describe Menu do
       expect(menu.return).to eq ["salami: 10", "olives: 15", "bagel: 6"]
     end
   end
-
-  context "When multiple items added and cart is checked out"
-    it "returns total " do
-
 end

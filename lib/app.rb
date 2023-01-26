@@ -5,11 +5,14 @@ require 'rubygems'
 require_relative "../credentials"
 
 class App
-  def initialize(menu)
+  def initialize(menu, requester = Twilio::REST::Client)
     @menu = menu
     @cart = []
     @account_sid = API_credentials::ACCOUNT_SID
     @auth_token = API_credentials::AUTH_TOKEN
+    @requester = requester
+    #@client = @requester.new(@account_sid, @auth_token)
+    #Twilio::REST::Client
   end
   
   def view_menu
@@ -33,8 +36,10 @@ class App
   def send_sms(current_time)
     eta = current_time + 19*60
     body = "Thank you! Your order was placed and will be delivered before #{eta.strftime("%I:%M")}"
-    @client = Twilio::REST::Client.new(@account_sid, @auth_token)
-    @client.messages.create(
+    # @client = @requester.new(@account_sid, @auth_token)
+    # object = @client.messages()
+    # object.create()
+    @requester.messages.create(
       from: '+16064044821',
       to: '+447497163596',
       body: body
@@ -43,13 +48,16 @@ class App
   end
 end
 
-# menu = Menu.new
-# app = App.new(menu)
-# dish1 = Dish.new("salami", 10)
-# dish2 = Dish.new("olives", 15)
-# menu.add_food(dish1)
-# menu.add_food(dish2)
-# app.add_cart("salami")
-# app.add_cart("olives")
-# app.add_cart("salami")
-# puts app.check_out
+
+sid = API_credentials::ACCOUNT_SID
+token = API_credentials::AUTH_TOKEN
+menu = Menu.new
+app = App.new(menu,Twilio::REST::Client.new(sid,token))
+dish1 = Dish.new("salami", 10)
+dish2 = Dish.new("olives", 15)
+menu.add_food(dish1)
+menu.add_food(dish2)
+app.add_cart("salami")
+app.add_cart("olives")
+app.add_cart("salami")
+puts app.check_out
