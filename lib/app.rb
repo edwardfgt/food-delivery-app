@@ -39,7 +39,7 @@ class App
     # @client = @requester.new(@account_sid, @auth_token)
     # object = @client.messages()
     # object.create()
-    @requester.messages.create(
+  
       from: '+16064044821',
       to: '+447497163596',
       body: body

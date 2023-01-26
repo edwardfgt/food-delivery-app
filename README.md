@@ -27,8 +27,9 @@
 ```ruby
 
 class App
-def initizialise()
+def initizialise(menu, requester = Twilio::REST::Client)
   #Creates a default menu
+  #requester is used to access Twilio API, but can be replaced with a double during testing
 end
 
 def view_menu
@@ -36,19 +37,27 @@ def view_menu
 end
 
 def add_cart(dish)
-#takes dish as input, adds to cart hash
+#takes dish as input, adds to cart
 end
 
+def view_cart
+#returns contents in cart
+
 def check_out
-#Adds up cart hash
+#Return total receipt
+#Calls send_sms
 end
 
 def send_sms
+#calls api to send sms
 end
 
 class Menu
 def initialize
-  @menu = {"Chicken wings" => 8, "Pasta" => 4}
+  @menu = []
+end
+
+def return
 end
 
 def add_food(dish) #add a new instance of a Dish object to @menu
