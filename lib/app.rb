@@ -29,11 +29,12 @@ class App
   end
   
   def send_sms
+    t = Time.now + 19*60
     @client = Twilio::REST::Client.new(@account_sid, @auth_token)
     @client.messages.create(
       from: '+16064044821',
       to: '+447497163596',
-      body: 'TEST'
+      body: "Thank you! Your order was placed and will be delivered before #{t.strftime("%I:%M %p")}"
     )
     puts "SMS SENT"
     
