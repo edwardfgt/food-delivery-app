@@ -1,6 +1,7 @@
 require_relative "./menu"
 require_relative "./dish"
 require "twilio-ruby"
+require 'rubygems'
 require_relative "../credentials"
 
 class App
@@ -24,30 +25,31 @@ class App
   end
   
   def check_out
-    send_sms
+    time = Time.now
+    send_sms(time)
     return @menu.checkout(@cart)
   end
   
-  def send_sms
-    t = Time.now + 19*60
+  def send_sms(current_time)
+    eta = current_time + 19*60
+    body = "Thank you! Your order was placed and will be delivered before #{eta.strftime("%I:%M")}"
     @client = Twilio::REST::Client.new(@account_sid, @auth_token)
     @client.messages.create(
       from: '+16064044821',
       to: '+447497163596',
-      body: "Thank you! Your order was placed and will be delivered before #{t.strftime("%I:%M %p")}"
+      body: body
     )
-    puts "SMS SENT"
-    
+    return body
   end
 end
 
-menu = Menu.new
-app = App.new(menu)
-dish1 = Dish.new("salami", 10)
-dish2 = Dish.new("olives", 15)
-menu.add_food(dish1)
-menu.add_food(dish2)
-app.add_cart("salami")
-app.add_cart("olives")
-app.add_cart("salami")
-puts app.send_sms
+# menu = Menu.new
+# app = App.new(menu)
+# dish1 = Dish.new("salami", 10)
+# dish2 = Dish.new("olives", 15)
+# menu.add_food(dish1)
+# menu.add_food(dish2)
+# app.add_cart("salami")
+# app.add_cart("olives")
+# app.add_cart("salami")
+# puts app.check_out

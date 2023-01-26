@@ -1,6 +1,8 @@
 require_relative "../lib/app"
 require_relative "../lib/dish"
 require_relative "../lib/menu"
+# require "twilio-ruby"
+
 
 describe "app menu integration test" do
   context "When app is initalised and menu is viewed with no items" do
@@ -56,5 +58,21 @@ describe "app menu integration test" do
     app.add_cart("salami")
     app.add_cart("olives")
     expect(app.check_out).to eq ("1x salami £10\n1x olives £15\nTotal: £25")
+  end
+
+
+  context "When the user has filled their cart" do
+    it "will send an ETA text to the user once they checkout" do
+      menu = Menu.new
+      app = App.new(menu)
+      dish1 = Dish.new("salami", 10)
+      dish2 = Dish.new("olives", 15)
+      menu.add_food(dish1)
+      menu.add_food(dish2)
+      app.add_cart("salami")
+      app.add_cart("olives")
+      time = Time.new(2023, 1, 26, 14, 49, 00)
+      expect(app.send_sms(time)).to eq "Thank you! Your order was placed and will be delivered before 03:08"
+    end
   end
 end
