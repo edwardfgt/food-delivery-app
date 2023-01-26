@@ -20,7 +20,7 @@ class App
   end
   
   def check_out
-  return "1x salami £10\n1x olives £15\nTotal: £25"
+    return @menu.checkout(@cart)
   end
   
   def send_sms
@@ -35,4 +35,5 @@ menu.add_food(dish1)
 menu.add_food(dish2)
 app.add_cart("salami")
 app.add_cart("olives")
+app.add_cart("salami")
 puts app.check_out

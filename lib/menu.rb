@@ -17,6 +17,22 @@ class Menu
     end
   end
 
+  def checkout(cart)
+    @items = ""
+    cart.each do |item|
+      @items << "1x #{item[:item]} £#{item[:cost]}\n"
+    end
+    return @items << total(cart)
+  end
+
+   def total(cart)
+     total = 0
+     cart.each do |item|
+       total += item[:cost]
+     end
+    return "Total: £#{total}"
+  end
+
 
   def add_food(dish)
     @menu << dish #add a new instance of a Dish object to @menu

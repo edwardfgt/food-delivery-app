@@ -7,6 +7,7 @@ describe Menu do
       menu = Menu.new
       expect(menu.return).to eq []
     end
+  end
 
   context "when multiple items added" do
     it "returns menu of items" do
@@ -17,7 +18,7 @@ describe Menu do
       menu.add_food(dish1)
       menu.add_food(dish2)
       menu.add_food(dish3)
-      expect(menu.return).to eq [dish1,dish2,dish3]
+      expect(menu.return).to eq ["salami: 10", "olives: 15", "bagel: 6"]
     end
   end
 end

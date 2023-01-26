@@ -1,6 +1,6 @@
-require "app"
-require "dish"
-require "menu"
+require_relative "../lib/app"
+require_relative "../lib/dish"
+require_relative "../lib/menu"
 
 describe "app menu integration test" do
   context "When app is initalised and menu is viewed with no items" do
@@ -9,6 +9,7 @@ describe "app menu integration test" do
       app = App.new(menu)
       expect(app.view_menu).to eq []
     end
+  end
 
   context "When items have been added to the menu" do
     it "returns one item on the menu" do
@@ -55,9 +56,5 @@ describe "app menu integration test" do
     app.add_cart("salami")
     app.add_cart("olives")
     expect(app.check_out).to eq ("1x salami £10\n1x olives £15\nTotal: £25")
-  
   end
 end
-
-
-
