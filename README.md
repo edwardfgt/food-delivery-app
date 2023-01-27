@@ -1,5 +1,13 @@
 # food-delivery-app
 
+#Usage
+
+    Clone this repo
+    Run bundle install to install required gems
+    create a credentials file to store your Twilio credentials.
+    Run the program with ruby app.rb
+
+
 # User Stories
 
     As a customer
