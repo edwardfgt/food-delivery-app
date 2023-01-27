@@ -28,8 +28,8 @@
 
 class App
 def initizialise(menu, requester = Twilio::REST::Client)
-  #Creates a default menu
-  #requester is used to access Twilio API, but can be replaced with a double during testing
+#Creates a default menu
+#requester is used to access Twilio API, but can be replaced with a double during testing
 end
 
 def view_menu
@@ -54,30 +54,30 @@ end
 
 class Menu
 def initialize
-  @menu = []
 end
 
-def return
+def return #returns items in @menu
+end
+
+def add_to_cart(item) #returns item stylised to add to cart in App
+end
+
+def checkout(cart) #returns stylised receipt
+end
+
+def total(cart) #returns cart total value
 end
 
 def add_food(dish) #add a new instance of a Dish object to @menu
 end
 
-def del_food(dish) #remove an instance of Dish object from @menu
-end
 
 class Dish
 def initialize(item, cost) #item is a string, cost is an integer
 end
 
-def cost 
-  #returns cost
+def cost  #returns cost
 end
-
-class SMS
-def initialize
-end
-
 
 
 ```
